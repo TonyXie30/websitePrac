@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Conference Rooms</title>
+    <link rel="stylesheet" type="text/css" href="table.css"/>
+    <script type="text/javascript" src="table2.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+
+</head>
+<body>
+<ul>
+    <li class="li-logo"><a class="nav-brand">
+        <img src="img/logo.png" alt="Site logo">
+        Conference Rooms
+    </a>
+    </li>
+    <li class="li-button">
+        <a href="#Home">Home</a>
+        <a href="#Adv">Advantage</a>
+        <a href="#Start">Start</a>
+        <a href="#Add" onclick="activeTabular()">Add Room</a>
+    </li>
+</ul>
+<div class="tran" id="Home">
+    <div class="tran-img"></div>
+    <h1 class="tran-font">We are here to help you. Greater helper for conference rooms</h1></div>
+<div class="tran-bg">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+              class="shape-fill"></path>
+    </svg>
+</div>
+<div class="tran-bt" id="Adv">
+    <div style="height: 100px"></div>
+    <h2>What can we do for you?</h2>
+    <div class="tran-bt-det">
+        <article class="tran-bt-det-bt">
+        <i><img src="img/funny.png" alt="funny" class="tran-img-set"></i>
+            <h3>Funny</h3>
+            <p>
+            This is a funny website to play.
+            </p>
+            <a style="color: aquamarine" href="http://www.baidu.com" target="_blank">
+                Learn More
+            </a>
+        </article>
+        <article class="tran-bt-det-bt">
+            <i><img src="img/convenient.png" alt="conn" class="tran-img-set" ></i>
+            <h3>convenient</h3>
+            <p>
+                This is a convenient website to play.
+            </p>
+            <a style="color: aquamarine" href="http://www.baidu.com" target="_blank">
+                Learn More
+            </a>
+        </article>
+        <article class="tran-bt-det-bt">
+            <i><img src="img/no-redundancy.png" alt="nred" class="tran-img-set"></i>
+            <h3>quick</h3>
+            <p>
+                This is a quick website to play.
+            </p>
+            <a style="color: aquamarine" href="http://www.baidu.com" target="_blank">
+                Learn More
+            </a>
+        </article>
+    </div>
+</div>
+<div class="table-container" id="Start">
+    <table border="1" cellpadding="10" cellspacing="5" class="bodyTable">
+        <caption>
+            <h1>Start your trial now!</h1>
+        </caption>
+        <tr>
+            <th>Room Name</th>
+            <th>Department</th>
+            <th>Type</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Max Duration</th>
+            <th>Operation</th>
+        </tr>
+        <tbody style="display: none" id="mainframe">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <input type="button" value="delete" onclick="removeRow(this)" class="input-button">
+                <br>
+                <input type="button" value="edit" onclick="edit(this)" class="input-button">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="overlay" id="overlay"></div>
+<div class="tabular" id="popup" style="display: none">
+    <h3>Add Room</h3>
+    <form name="Add Room" id="add-room">
+        Room Name:
+        <label>
+            <input type="text" name="room-name"/>
+            <a class="tabular-bt" onclick="closeTabular()" type="button">x</a>
+        </label>
+        <br/> Type:
+        <label>
+            <input type="radio" name="group" value="small"/> Small
+            <input type="radio" name="group" value="medium"/> Medium
+            <input type="radio" name="group" value="big"/> Big
+        </label>
+        <br/> Department:
+        <label>
+            <input type="text" name="department" id="departmentId"/>
+        </label>
+        <br/>
+
+        <div>
+            <label for="datePicker">Date：</label>
+            <input type="text" id="datePicker" name="date" required>
+            <script>formatDate()</script>
+        </div>
+
+        <div>
+            <label for="timePicker">Start Time:</label>
+            <input type="text" id="timePicker" name="time" required onchange="formatEndTime()">
+            <script>formatTime()</script>
+        </div>
+
+        <div>
+            <label for="timeEnd">End Time:</label>
+            <input type="text" id="timeEnd" name="time" required>
+        </div>
+
+        Location:
+        <label>
+            <select id="Lo" style="width: 200px">
+                <option>Teaching Building No.1 Lecture Hall</option>
+                <option>Research Building Lecture Hall</option>
+                <option>Library Conference Hall</option>
+                <option>South Building</option>
+            </select>
+            <input type="text" id="roomDetail" style="width: 50px" required>
+        </label>
+
+        <br>
+        Max Duration:
+        <label>
+            <input type="text" id="max-duration">
+        </label>
+        <br>
+        <input type="button" value="Submit" onclick="addRow()" id="submit" class="input-button">
+        <input type="button" value="cancel" onclick="closeTabular()" class="input-button">
+        <br>
+    </form>
+</div>
+</body>
+</html>
