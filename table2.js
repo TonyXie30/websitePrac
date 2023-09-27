@@ -72,6 +72,8 @@ function activeTabular() {
     let lap = document.getElementById("overlay");
     lap.style.display = 'block'
     table.style.display = 'block';
+    document.getElementById("submit").style.display = 'block';
+    document.getElementById("save").style.display = 'none';
 }
 
 function closeTabular(){
@@ -167,11 +169,35 @@ function edit(inputting) {
     rom.value = result.lastWord;
     duration.value = maxDuration.substring(0,maxDuration.length-1);
 
-    document.getElementById("submit").addEventListener("click", function (event) {
+    document.getElementById("submit").style.display = 'none';
+    document.getElementById("save").style.display = 'flex';
+    document.getElementById("save").addEventListener("click", function (event) {
         if (!check(roomName.value,department.value,duration.value,date.value,startTime.value,endTime.value,false)){
             return
         }
         removeRow(inputting);
+
+        let bodyObj = document.getElementById("mainframe");
+        if (!bodyObj) {
+            alert("Body of Table not Exist!");
+            return;
+        }
+        let rowCount = bodyObj.rows.length;
+        let cellCount = bodyObj.rows[0].cells.length;
+        bodyObj.style.display = ""; // display the tbody
+        let newRow = bodyObj.insertRow(rowCount++);
+        newRow.insertCell(0).innerHTML = roomName.value;
+        newRow.insertCell(1).innerHTML = department.value;
+        newRow.insertCell(2).innerHTML = document.querySelector('form input[name="group"]:checked').value;
+        newRow.insertCell(3).innerHTML = loc.value + " " + rom.value;
+        newRow.insertCell(4).innerHTML = date.value;
+        newRow.insertCell(5).innerHTML = startTime.value;
+        newRow.insertCell(6).innerHTML = endTime.value;
+        newRow.insertCell(7).innerHTML = duration.value+"h";
+        newRow.insertCell(8).innerHTML = bodyObj.rows[0].cells[cellCount - 1].innerHTML; // copy the "delete" button
+        bodyObj.rows[0].style.display = "none"; // hide first row
+
+        closeTabular();
     });
 }
 function parseDate(dateString) {

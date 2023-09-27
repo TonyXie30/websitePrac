@@ -237,6 +237,14 @@ td:active{
 .tabular-bt:active{
     background-color: mediumvioletred;
 }
+.button-panel{
+    position: relative;
+    display: flex;
+    height: 100px;
+    flex-direction: column; /* 将按钮垂直排列 */
+    justify-content: center; /* 在垂直方向上居中对齐 */
+    align-items: center; /* 在水平方向上居中对齐 */
+}
 .input-button{
     font-family: "JetBrains Mono ExtraBold",emoji;
     background-color: azure;
