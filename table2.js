@@ -92,7 +92,7 @@ function check(roomName,department,duration,date,startTime,endTime,alertOrNot) {
         message+="Wrong department\n";
         err = false;
     }
-    if (typeof duration !== 'number'){
+    if (isNaN(parseFloat(duration))){
         message+="Wrong duration\n";
         err = false;
     }
